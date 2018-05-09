@@ -498,7 +498,8 @@ class BPF(object):
         found_stext = False
         with open("/proc/kallsyms", "rb") as avail_file:
             for line in avail_file:
-                (_, t, fn) = line.rstrip().split()[:3]
+                cols = line.rstrip().split()
+                (t, fn) = (cols[1], cols[2])
                 if found_stext is False:
                     if fn == b'_stext':
                         found_stext = True
